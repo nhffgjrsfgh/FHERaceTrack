@@ -48,7 +48,7 @@ function getFHERaceTrackByChainId(
   const entry =
     FHERaceTrackAddresses[chainId.toString() as keyof typeof FHERaceTrackAddresses];
 
-  if (!("address" in entry) || entry.address === ethers.ZeroAddress) {
+  if (!entry || !("address" in entry) || entry.address === ethers.ZeroAddress) {
     return { abi: FHERaceTrackABI.abi, chainId };
   }
 
