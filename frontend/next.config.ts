@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   basePath: basePath || undefined,
   output: process.env.NEXT_EXPORT === 'true' ? 'export' : undefined,
   trailingSlash: true,
+  images: { unoptimized: true },
+  reactStrictMode: true,
   // Headers are not supported in static export, but we can use meta tags in HTML
   // For static export, headers will be ignored
   ...(process.env.NEXT_EXPORT !== 'true' && {
@@ -14,7 +16,7 @@ const nextConfig: NextConfig = {
       // Required by FHEVM 
       return Promise.resolve([
         {
-          source: '/',
+          source: '/:path*',
           headers: [
             {
               key: 'Cross-Origin-Opener-Policy',
@@ -24,6 +26,13 @@ const nextConfig: NextConfig = {
               key: 'Cross-Origin-Embedder-Policy',
               value: 'require-corp',
             },
+          ],
+        },
+        {
+          source: '/:path*.wasm',
+          headers: [
+            { key: 'Content-Type', value: 'application/wasm' },
+            { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
           ],
         },
       ]);

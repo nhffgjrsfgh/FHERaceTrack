@@ -2,11 +2,11 @@
 pragma solidity ^0.8.24;
 
 import {FHE, euint32, externalEuint32, ebool} from "@fhevm/solidity/lib/FHE.sol";
-import {SepoliaConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
+import {ZamaEthereumConfig} from "@fhevm/solidity/config/ZamaConfig.sol";
 
 /// @title FHE RaceTrack - A decentralized encrypted horse racing DApp
 /// @notice This contract implements a horse racing system using FHEVM for privacy-preserving operations
-contract FHERaceTrack is SepoliaConfig {
+contract FHERaceTrack is ZamaEthereumConfig {
     // ============ Events ============
     
     event HorseMinted(address indexed owner, uint256 indexed horseId, uint256 timestamp);
